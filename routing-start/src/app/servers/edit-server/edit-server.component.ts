@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 
 import { ServersService } from "../servers.service";
 
@@ -13,7 +14,7 @@ export class EditServerComponent implements OnInit {
   serverName = "";
   serverStatus = "";
   isEditable: boolean;
-
+  unSaved = true;
   constructor(
     private serversService: ServersService,
     private activatedRoute: ActivatedRoute
@@ -27,7 +28,8 @@ export class EditServerComponent implements OnInit {
       this.isEditable = data["allowedEdit"] === "1" ? true : false;
     });
     this.activatedRoute.fragment.subscribe((data) => console.log(data));
-    this.server = this.serversService.getServer(1);
+    let id = +this.activatedRoute.snapshot.params["id"];
+    this.server = this.serversService.getServer(id);
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
   }
@@ -37,5 +39,13 @@ export class EditServerComponent implements OnInit {
       name: this.serverName,
       status: this.serverStatus,
     });
+  }
+  canDeactivate(): Observable<boolean> | boolean {
+    if (!this.unSaved) {
+      const result = window.confirm("There are unsaved changes! Are you sure?");
+
+      return result;
+    }
+    return true;
   }
 }

@@ -10,10 +10,16 @@
           <a [routerLink]="['/']">Home</a>
         </li>
         <li role="presentation" [routerLinkActive]="['active']">
-          <a [routerLink]="['/servers/1']">Servers</a>
+          <a [routerLink]="['/servers']">Servers</a>
         </li>
         <li role="presentation" [routerLinkActive]="['active']">
           <a [routerLink]="['/users']">Users</a>
+        </li>
+        <li (click)="onLogin()">
+          <a>Login</a>
+        </li>
+        <li (click)="onLogout()">
+          <a>logout</a>
         </li>
       </ul>
     </div>
