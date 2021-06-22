@@ -1,0 +1,6 @@
+<h1>{{ parentData }}</h1>
+<app-child-component
+  [fromParentData]="dataPassToChild"
+  (dataFormChild)="onDataFormChild($event)"
+></app-child-component>
+<h1>{{ childToParent | json }}</h1>

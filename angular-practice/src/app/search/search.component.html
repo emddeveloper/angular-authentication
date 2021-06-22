@@ -1,0 +1,5 @@
+<h1 appBackgroundChange>Search Component</h1>
+<p appRandom>Search Here</p>
+<input type="text" #search placeholder="Please search here.." />
+<button (click)="onSearch(search)">Search</button>
+<p>{{ searchData | json }}</p>
