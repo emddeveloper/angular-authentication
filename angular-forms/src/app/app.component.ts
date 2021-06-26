@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   title = 'angular-forms';
+  defaultSecret = 'pet';
   @ViewChild('f') loginformvalue: NgForm;
   onSubmit(formvalue: NgForm) {
     console.log(formvalue.value);
