@@ -1,0 +1,93 @@
+<div class="container">
+  <h1>Reactive form Exam</h1>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="projectform" (ngSubmit)="onSubmit()">
+        <div>
+          <div class="form-group">
+            <label for="username">Project name</label>
+            <input
+              type="text"
+              id="projectname"
+              class="form-control"
+              formControlName="projectname"
+            />
+            <span
+              *ngIf="
+                projectform.get('projectname').invalid &&
+                projectform.get('projectname').touched
+              "
+            >
+              <span
+                *ngIf="projectform.get('projectname').errors['required']"
+                class="text-danger"
+              >
+                Please provide a project name.
+              </span>
+              <span
+                *ngIf="projectform.get('projectname').errors['invalidname']"
+                class="text-danger"
+              >
+                {{ projectform.get("projectname").value }} is an invalid project
+                name.Please enter other name.
+              </span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="username">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+            />
+            <span
+              *ngIf="
+                projectform.get('email').invalid &&
+                projectform.get('email').touched
+              "
+            >
+              <span
+                *ngIf="projectform.get('email').errors['required']"
+                class="text-danger"
+              >
+                Please provide a email.
+              </span>
+              <span
+                *ngIf="projectform.get('email').errors['email']"
+                class="text-danger"
+              >
+                Please provide a valid Email ID.
+              </span>
+              <span
+                *ngIf="projectform.get('email').errors['invalidemail']"
+                class="text-danger"
+              >
+                {{ projectform.get("email").value }} is an invalid Email ID.
+              </span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="projectstatus">Project Status</label>
+            <select
+              id="projectstatus"
+              class="form-control"
+              formControlName="status"
+            >
+              <option [value]="status" *ngFor="let status of projectstatus">
+                {{ status }}
+              </option>
+            </select>
+          </div>
+          <button
+            class="btn btn-primary"
+            [disabled]="projectform.invalid || projectform.pending"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{ data | json }}

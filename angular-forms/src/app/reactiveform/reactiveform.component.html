@@ -1,0 +1,86 @@
+<div class="container">
+  <h1>Reactive form example</h1>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
+        <div formGroupName="userdata">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              formControlName="username"
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                signupform.get('userdata.username').invalid &&
+                signupform.get('userdata.username').touched
+              "
+            >
+              <span
+                *ngIf="signupform.get('userdata.username').errors['required']"
+                >Username is a mandatory field.</span
+              >
+              <span
+                *ngIf="
+                  signupform.get('userdata.username').errors['forbiddenuser']
+                "
+                >{{ signupform.get("userdata.username").value }} is an invalid
+                username</span
+              >
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control"
+              formControlName="email"
+            />
+            <span
+              class="text-danger"
+              *ngIf="
+                signupform.get('userdata.email').invalid &&
+                signupform.get('userdata.email').touched
+              "
+              >Please provide a valid email.</span
+            >
+          </div>
+        </div>
+        <div formArrayName="hobbies">
+          <h4>Add hobbies</h4>
+          <button class="btn btn-primary" (click)="addhobby()" type="button">
+            Add Hobbies
+          </button>
+          <div
+            class="form-group"
+            *ngFor="let hobbycontrol of Controls; let i = index"
+          >
+            <input type="text" [formControlName]="i" class="form-control" />
+          </div>
+        </div>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input type="radio" [value]="gender" formControlName="gender" />{{
+              gender
+            }}
+          </label>
+        </div>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="signupform.invalid || signupform.pending"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<h1>Form output value</h1>
+<p *ngIf="data">
+  {{ data | json }}
+</p>
