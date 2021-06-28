@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  pipeexample = 'Hello';
   title = 'angular-forms';
   defaultSecret = 'pet';
   data = '';

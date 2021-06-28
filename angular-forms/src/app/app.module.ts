@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ReactiveformComponent } from './reactiveform/reactiveform.component';
 import { ReactiveFormExam } from './reactiveFormExam/reactiveformexam.component';
+import { ReversePipe } from './revers.pipe';
 import { subscription } from './subscription/subscription.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { subscription } from './subscription/subscription.component';
     subscription,
     ReactiveformComponent,
     ReactiveFormExam,
+    ReversePipe,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [],
