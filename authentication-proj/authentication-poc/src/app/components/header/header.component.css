@@ -1,0 +1,6 @@
+a.navbar-brand {
+  width: 200px;
+}
+.navbar-dark .navbar-nav .nav-link.active {
+  font-weight: bold;
+}
