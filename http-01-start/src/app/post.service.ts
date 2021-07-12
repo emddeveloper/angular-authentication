@@ -32,18 +32,19 @@ export class PostService {
   createPost(postData: Post) {
     // Send Http request
     //console.log(postData);
-    this.http
+    return this.http
       .post(
         "https://skangular-9c64f-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json",
         postData
       )
-      .subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
           this.error.next(error);
-        }
+          return error;
+        })
       );
   }
   //delete all data
@@ -51,5 +52,20 @@ export class PostService {
     return this.http.delete(
       "https://skangular-9c64f-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json"
     );
+  }
+  //delete specific post
+  deleteOne(id: string) {
+    return this.http
+      .delete(
+        `https://skangular-9c64f-default-rtdb.asia-southeast1.firebasedatabase.app/posts/${id}.json`
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error: any) => {
+          return error;
+        })
+      );
   }
 }

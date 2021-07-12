@@ -20,8 +20,12 @@ export class AppComponent implements OnInit {
   }
 
   onCreatePost(postData: any) {
-    this.postservice.createPost(postData.value);
-    postData.reset();
+    this.postservice.createPost(postData.value).subscribe((response: any) => {
+      postData.value.id = response.name;
+      console.log(postData);
+      this.loadedPosts.push(postData.value);
+      postData.reset();
+    });
   }
 
   onFetchPosts() {
@@ -47,4 +51,11 @@ export class AppComponent implements OnInit {
     });
   }
   resetform() {}
+  delete(id: string) {
+    this.postservice.deleteOne(id).subscribe((response) => {
+      this.loadedPosts = this.loadedPosts.filter((post) => {
+        return post.id !== id;
+      });
+    });
+  }
 }
