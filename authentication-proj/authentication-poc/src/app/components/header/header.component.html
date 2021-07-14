@@ -17,6 +17,7 @@
           routerLink="posts"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
+          *ngIf="isAuthenticated"
           >Post</a
         >
         <a
@@ -24,7 +25,15 @@
           routerLink="authentication"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Authentication</a
+          *ngIf="!isAuthenticated"
+          >Login/Signup</a
+        >
+        <a
+          class="nav-link"
+          style="cursor: pointer"
+          (click)="logout()"
+          *ngIf="isAuthenticated"
+          >Logout</a
         >
       </div>
     </div>

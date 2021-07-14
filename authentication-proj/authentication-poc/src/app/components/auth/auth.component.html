@@ -1,1 +1,56 @@
-<p>auth works!</p>
+<section class="row my-5 w-50 mx-auto">
+  {{ users }}
+  <div class="alert alert-danger" role="alert" *ngIf="error">
+    {{ error | json }}
+  </div>
+  <app-loading class="text-center" *ngIf="isLoading"></app-loading>
+  <form
+    class="form-floating"
+    #authformdata="ngForm"
+    (ngSubmit)="authformsubmit(authformdata)"
+    *ngIf="!isLoading"
+  >
+    <h1 class="display-6 mb-5">{{ isLogin ? "Login" : "Signup" }}</h1>
+    <div class="form-floating mb-3">
+      <input
+        type="email"
+        class="form-control"
+        id="floatingInput"
+        placeholder="name@example.com"
+        px-2
+        ngModel
+        name="email"
+        required
+      />
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        class="form-control"
+        id="floatingPassword"
+        placeholder="Password"
+        ngModel
+        name="password"
+        required
+      />
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="form-floating mt-3">
+      <button
+        class="btn btn-primary mx-3"
+        type="submit"
+        [disabled]="authformdata.invalid"
+      >
+        {{ isLogin ? "Login" : "Signup" }}</button
+      >|
+      <button
+        class="btn btn-secondary mx-3"
+        type="button"
+        (click)="toggleauthForm()"
+      >
+        {{ isLogin ? "Don't have an account?" : "Login here" }}
+      </button>
+    </div>
+  </form>
+</section>
